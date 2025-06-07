@@ -1,130 +1,111 @@
 # AVIF/AV1 Media Converter
 
-Une application Next.js pour convertir automatiquement vos images et vidéos vers les formats modernes AVIF et AV1.
+A Next.js 15 application to automatically convert your images and videos to the modern AVIF and AV1 formats.
 
-## 🎯 Fonctionnalités
+## 🎯 Features
 
-- **Images** → Conversion vers AVIF
-- **Vidéos** → Miniatures AVIF animées (10 frames) + Conversion AV1
-- Interface temps réel avec progression
-- Traitement en arrière-plan via Worker Threads
-- Galerie d'affichage des résultats
+- **Images** → Conversion to AVIF
+- **Vidéos** → Animated AVIF miniature (10 frames) + AV1 conversion
+- Real time progress tracking
+- Background processing using Worker Threads
+- Processing statistics
+- Gallery to display results
 
 ## 📁 Structure
+
+> Hypothetical project structure for clarity
 
 ```
 avif-av1-converter/
 ├── src/
 │   ├── app/
 │   │   ├── api/
-│   │   │   ├── process/          # Lancement des jobs
-│   │   │   ├── progress/[jobId]/ # SSE pour progression
-│   │   │   └── files/            # Scan des fichiers
+│   │   │   ├── process/          # Start processing
+│   │   │   ├── progress/[jobId]/ # Progress tracking (SSE)
+│   │   │   └── files/            # File detection
 │   │   ├── components/
 │   │   └── page.tsx
 │   ├── lib/
-│   │   ├── ffmpeg.ts            # Service FFmpeg
-│   │   ├── processor.ts         # Logique de traitement
+│   │   ├── ffmpeg.ts            # FFmpeg wrapper
+│   │   ├── processor.ts         # Image/Video processing logic
 │   │   └── workers/
 │   │       └── video-processor.js
 │   └── types/
 ├── public/
-│   ├── input/                   # Dossier source
-│   └── output/                  # Fichiers convertis
+│   ├── input/                   # Files to process
+│   └── output/                  # Processed files
 └── package.json
 ```
 
 ## 🚀 Installation
 
 ```bash
-# Cloner et installer
+# Clone and install dependencies
 git clone <repo>
-cd avif-av1-converter
+cd media-converter
 pnpm install
 
-# Créer les dossiers
+# Create input/output directories
 mkdir -p public/input public/output
 
-# Démarrer
+# Start the development server
 pnpm dev
 ```
 
-## 🔧 Prérequis
+## 🔧 Prerequisites
 
-- Node.js 18+
-- FFmpeg installé système ou `@ffmpeg/ffmpeg`
+- Node.js 22+
+- FFmpeg installed and accessible in PATH
 - PNPM
 
-## 💻 Utilisation
+## 💻 Usage
 
-1. Placer images/vidéos dans `public/input/`
-2. Ouvrir `http://localhost:3000`
-3. Cliquer "Traiter les fichiers"
-4. Suivre la progression en temps réel
-5. Consulter les résultats dans la galerie
+1. Place images/videos in `public/input/`
+2. Start the server with `pnpm dev`
+3. Open `http://localhost:3000`
+4. Click "Process Files"
+5. Wait for processing to complete (real-time updates)
+6. View results in `public/output/`, or directly in the gallery
 
 ## 🔄 Architecture
 
-### Flux de traitement
+### Processing Flow
 ```
-Utilisateur → API → Worker Thread → FFmpeg/LibAVIF → Résultats
+   User  →   API  →  Worker Thread  →  FFmpeg/LibAVIF  →  Results
      ↓                    ↓
-Client React ← SSE ← parentPort ← Progression
+React Client ← SSE ← parentPort ← Progression
 ```
 
-### Formats supportés
-- **Entrée** : JPG, PNG, WebP, MP4, MOV, AVI
-- **Sortie** : AVIF (statique/animé), AV1
+### Formats
+- **Input** : *To be determined* (e.g., JPEG, PNG, MP4)
+- **Output** : AVIF, webm (AV1)
 
 ## 🛠️ Technologies
 
-- **Frontend** : Next.js 14, TypeScript, Tailwind CSS
+- **Frontend** : Next.js 15, TypeScript, Tailwind CSS
 - **Backend** : Node.js Worker Threads, Server-Sent Events
-- **Traitement** : FFmpeg, LibAVIF
-- **Temps réel** : EventSource, SSE
+- **Processing** : FFmpeg, LibAVIF
+- **Real time** : EventSource, SSE
 
-## 📊 Progression temps réel
+## 📊 Real-time Processing
 
-Le système utilise :
-- **Worker Threads** pour traitement non-bloquant
-- **Server-Sent Events** pour progression temps réel
-- **EventSource** côté client pour mises à jour
+This application uses:
+- **Worker Threads** to handle a non-blocking processing of images and videos
+- **Server-Sent Events** (SSE) for real-time updates
+- **EventSource** to receive updates in the frontend
 
 ## 🎨 Interface
 
-- Dashboard principal avec bouton de traitement
-- Barre de progression temps réel
-- Galerie comparative avant/après
-- Statistiques de compression
+- Dashboard with a modern UI, to start, follow and see the results of the processing
+- Real-time progress bar for each file
+- Gallery to display processed files
+- Statistics on processing time and file sizes
 
 ## 🔧 Configuration
 
-Variables d'environnement :
-```env
-FFMPEG_PATH=/usr/bin/ffmpeg
-INPUT_DIR=public/input
-OUTPUT_DIR=public/output
-MAX_CONCURRENT_JOBS=3
-```
+Environment variables :
 
-## 📝 Étapes de développement
-
-1. ✅ Configuration environnement
-2. ✅ Interface utilisateur
-3. ✅ API détection fichiers
-4. ✅ Service traitement images
-5. ✅ Service traitement vidéo
-6. ✅ Worker Threads + SSE
-7. ✅ Galerie d'affichage
-8. 🔄 Optimisations
-
-## 🤝 Contribution
-
-1. Fork le projet
-2. Créer une branche feature
-3. Commit les changements
-4. Push vers la branche
-5. Ouvrir une Pull Request
+> *To be determined*
 
 ## 📄 Licence
 
